@@ -138,7 +138,9 @@ func run(dir string, env map[string]string, stdout, stderr io.Writer, cmd string
 	c.Stderr = stderr
 	c.Stdout = stdout
 	c.Stdin = os.Stdin
-	log.Println("exec:", cmd, strings.Join(args, " "))
+	if mg.Verbose() {
+		log.Println("exec:", cmd, strings.Join(args, " "))
+	}
 	err = c.Run()
 	return CmdRan(err), ExitStatus(err), err
 }
